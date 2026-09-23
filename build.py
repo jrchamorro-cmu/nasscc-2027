@@ -226,8 +226,6 @@ def person(entry, folder):
         lines.append(dept)
     lines.append(inst)
     cap = "<br>".join(lines)
-    if site:
-        cap += f'<br><a class="site" href="{site}">Group website</a>'
     return f'<figure class="pcard">{portrait(folder, slug, name)}<figcaption>{cap}</figcaption></figure>'
 
 
@@ -288,8 +286,7 @@ SHOW_PHOTOS = False
 def speaker_line(e):
     name, title, dept, inst, theme, site, slug = e
     parts = [title] + ([dept] if dept else []) + [inst]
-    link = f' (<a href="{site}">website</a>)' if site else ""
-    return f"<li><b>{name}</b>, <span>{', '.join(parts)}</span>{link}</li>"
+    return f"<li><b>{name}</b>, <span>{', '.join(parts)}</span></li>"
 
 def theme_lists():
     out = []
