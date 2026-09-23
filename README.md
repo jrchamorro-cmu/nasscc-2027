@@ -34,6 +34,8 @@ Preview: `python3 -m http.server 8000 --directory docs` then http://localhost:80
 
 ## Publishing (GitHub Pages plus Cloudflare DNS)
 
+Done 2026-09-23: repository `jrchamorro-cmu/nasscc-2027`, Pages from `main` and `/docs`, custom domain nasscc.com, DNS records at Cloudflare. To publish a change: edit, `python3 build.py`, commit, `git push`. The steps below are the record of the setup.
+
 1. Create the GitHub repository `nasscc-2027` (public) and push `main`.
 2. Repository Settings, Pages: deploy from branch `main`, folder `/docs`. The custom domain
    `nasscc.com` is written by the build into `docs/CNAME`; enter it in the same screen.
