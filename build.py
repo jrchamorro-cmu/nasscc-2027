@@ -131,6 +131,10 @@ h3{color:#1b2a4e}
 .masthead{padding:22px 0 0;border-bottom:1px solid #c8c8c8}
 .masthead .row{display:flex;align-items:center;gap:22px}
 .masthead .row>a{flex:none}
+.masthead .titleblock{flex:1 1 auto;min-width:0}
+.masthead .host img{width:215px;height:auto;margin-bottom:10px}
+@media (max-width:900px){.masthead .host img{width:170px}}
+@media (max-width:720px){.masthead .row{flex-wrap:wrap}.masthead .host{order:3;margin-left:0}.masthead .host img{width:150px}}
 .masthead .mark{width:112px;height:112px;flex:none;margin-bottom:10px}
 @media (max-width:600px){.masthead .mark{width:72px;height:72px}}
 .masthead h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 2px}
@@ -156,7 +160,7 @@ li{margin:0 0 4px}
 figure{margin:0 0 22px}
 figure img{width:100%;height:auto}
 figcaption{font-size:13px;color:#555;padding-top:6px}
-.banner img{aspect-ratio:2/1;object-fit:cover;object-position:50% 35%}
+.banner img{aspect-ratio:2/1.1;object-fit:cover;object-position:50% 0}
 .cols{display:grid;grid-template-columns:1.15fr 1fr;gap:48px;align-items:start}
 @media (max-width:720px){.cols{grid-template-columns:1fr;gap:12px}}
 table{border-collapse:collapse;width:100%;margin:6px 0 16px;font-size:15.5px}
@@ -242,10 +246,10 @@ def page(file, title, body):
 <body>
 <div class="topband"></div>
 <div class="masthead"><div class="wrap">
-<div class="row"><a href="index.html"><img class="mark" src="img/site/logo.png" alt="NASSCC 2027"></a><div>
+<div class="row"><a href="index.html"><img class="mark" src="img/site/logo.png" alt="NASSCC 2027"></a><div class="titleblock">
 <h1><a href="index.html">North American Solid State Chemistry Conference 2027</a></h1>
 <p class="sub">Duquesne University, Pittsburgh, Pennsylvania. Sunday, July 25 to Wednesday, July 28, 2027.</p>
-</div></div>
+</div><a class="host" href="https://www.duq.edu/"><img src="img/site/duquesne.svg" alt="Duquesne University"></a></div>
 <nav>
 {nav}
 </nav>
