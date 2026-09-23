@@ -118,78 +118,62 @@ LINEAGE = [
 ]
 
 CSS = r"""
-:root{color-scheme:light;--bg:#fff;--ink:#1a1a1a;--muted:#5d5d5d;--link:#8a6512;--gold:#c9a227;--rule:#dcdcda;--rule-strong:#1a1a1a;--tint:#f4f3ef}
+body{margin:0;background:#fff;color:#222;font:16px/1.55 "Helvetica Neue",Helvetica,Arial,sans-serif}
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:var(--link);text-decoration:underline;text-underline-offset:2px}
-a:hover{text-decoration-thickness:2px}
+a{color:#1a4a8a}
+a:hover{color:#0b2f5e}
 img{max-width:100%;display:block}
-.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
-.serif,h2,h3,.masthead .title{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif}
-.topband{height:8px;background:var(--gold)}
-.masthead .row{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;padding:26px 0 18px}
-.masthead .title{font-size:clamp(24px,3.4vw,36px);font-weight:700;letter-spacing:-.01em;line-height:1.15;margin:0}
-.masthead .title a{color:var(--ink);text-decoration:none}
-.masthead .title small{display:block;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--link);margin-bottom:8px}
-.masthead .when{text-align:right;font-size:15px;color:var(--muted);line-height:1.45;flex:none}
-.masthead .when b{display:block;color:var(--ink);font-size:16px}
-@media (max-width:720px){.masthead .row{flex-direction:column;align-items:flex-start;gap:8px}.masthead .when{text-align:left}}
-.navband{background:var(--tint);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
-nav{display:flex;gap:0;overflow-x:auto}
-nav a{font-size:15px;color:var(--ink);text-decoration:none;white-space:nowrap;padding:11px 18px 10px 0;margin-right:6px;border-bottom:3px solid transparent}
-nav a:hover{color:var(--link)}
-nav a.active{border-bottom-color:var(--gold);font-weight:700}
-@media (max-width:720px){nav{flex-wrap:wrap;overflow:visible}nav a{padding:8px 14px 8px 0}}
-main{padding:34px 0 64px;min-height:50vh}
-h2{font-size:30px;font-weight:700;letter-spacing:-.005em;margin:0 0 14px;line-height:1.2}
-h3{font-size:21px;font-weight:700;margin:24px 0 8px}
-p{margin:0 0 13px;max-width:76ch}
-ul,ol{margin:0 0 13px;padding-left:22px}
-li{margin:0 0 5px;max-width:76ch}
-.small{font-size:13.5px;color:var(--muted)}
-.sect{margin-top:40px;padding-top:26px;border-top:1px solid var(--rule)}
-.sect:first-child,.sect.first{margin-top:0;padding-top:0;border-top:0}
-.lead{font-size:18px;max-width:70ch}
-.tba{color:var(--muted);font-style:italic}
-figure{margin:0 0 30px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:Georgia,"Iowan Old Style",Palatino,"Times New Roman",serif;font-weight:700;line-height:1.25}
+.masthead{padding:26px 0 10px;border-bottom:3px double #999}
+.masthead h1{font-size:34px;margin:0 0 2px}
+.masthead h1 a{color:#222;text-decoration:none}
+.masthead .sub{margin:0 0 12px;font-size:17px;color:#444}
+nav{font-size:16px;padding:6px 0 0}
+nav a{color:#1a4a8a;text-decoration:none;margin-right:6px}
+nav a::after{content:"|";color:#999;margin-left:9px}
+nav a:last-child::after{content:""}
+nav a.active{font-weight:700;color:#222}
+nav a:hover{text-decoration:underline}
+main{padding:26px 0 50px;min-height:50vh}
+h2{font-size:27px;margin:28px 0 10px}
+h2:first-child{margin-top:0}
+h3{font-size:20px;margin:22px 0 6px}
+p{margin:0 0 12px;max-width:80ch}
+ul,ol{margin:0 0 12px;padding-left:26px}
+li{margin:0 0 4px;max-width:80ch}
+.small{font-size:14px;color:#555}
+.sect{margin-top:30px}
+.lead{font-size:17px;max-width:80ch}
+.tba{color:#666;font-style:italic}
+figure{margin:0 0 22px}
 figure img{width:100%;height:auto}
-figcaption{font-size:12.5px;color:var(--muted);padding-top:7px}
+figcaption{font-size:13px;color:#555;padding-top:6px}
 .banner img{aspect-ratio:3/1.15;object-fit:cover}
-.cols{display:grid;grid-template-columns:1.35fr 1fr;gap:56px;align-items:start}
-@media (max-width:720px){.cols{grid-template-columns:1fr;gap:20px}}
-dl.facts{margin:0;font-size:15px;background:var(--tint);padding:6px 20px 8px;border-top:3px solid var(--gold)}
-dl.facts div{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:9px 0;border-bottom:1px solid var(--rule)}
-dl.facts div:last-child{border-bottom:0}
-dl.facts dt{margin:0;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:3px}
-dl.facts dd{margin:0}
-table{border-collapse:collapse;width:100%;margin:6px 0 16px;font-size:15px}
-th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--rule);vertical-align:top}
-th{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;border-bottom:2px solid var(--rule-strong)}
+.cols{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:start}
+@media (max-width:720px){.cols{grid-template-columns:1fr;gap:12px}}
+table{border-collapse:collapse;width:100%;margin:6px 0 16px;font-size:15.5px}
+th,td{text-align:left;padding:7px 12px 7px 0;border-bottom:1px solid #ccc;vertical-align:top}
+th{font-weight:700;border-bottom:2px solid #888}
+table.facts td:first-child{font-weight:700;width:150px;white-space:nowrap}
 .tscroll{overflow-x:auto}
-ol.themes{columns:2;column-gap:44px;padding-left:22px}
-ol.themes li{break-inside:avoid;margin:0 0 8px;max-width:none}
-@media (max-width:720px){ol.themes{columns:1}}
 /* people */
-.pgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:30px 26px;margin:6px 0 10px}
+.pgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:26px 24px;margin:6px 0 10px}
 @media (max-width:1000px){.pgrid{grid-template-columns:repeat(4,1fr)}}
 @media (max-width:820px){.pgrid{grid-template-columns:repeat(3,1fr)}}
-@media (max-width:600px){.pgrid{grid-template-columns:repeat(2,1fr);gap:22px 16px}}
+@media (max-width:600px){.pgrid{grid-template-columns:repeat(2,1fr);gap:20px 14px}}
 .pcard{margin:0}
-.portrait{width:100%;aspect-ratio:1/1;object-fit:cover;background:var(--tint)}
-.portrait.empty{border:1px solid var(--rule)}
-.pcard figcaption{padding-top:9px;font-size:13.5px;color:var(--muted);line-height:1.45}
-.pcard .nm{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-size:17px;font-weight:700;color:var(--ink);display:block;margin-bottom:3px}
-.pcard .site{display:inline-block;margin-top:4px;font-size:13px}
-.orgs{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 26px;max-width:760px}
-@media (max-width:600px){.orgs{grid-template-columns:1fr 1fr;gap:20px 16px}}
-.namelist{columns:3;column-gap:40px;padding-left:0;list-style:none;font-size:15px;max-width:none}
-.namelist li{break-inside:avoid;padding:5px 0;border-bottom:1px solid var(--rule);max-width:none}
-.namelist li span{color:var(--muted)}
-@media (max-width:900px){.namelist{columns:2}}
+.portrait{width:100%;aspect-ratio:1/1;object-fit:cover;background:#e9e9e9}
+.portrait.empty{background:#eee}
+.pcard figcaption{padding-top:7px;font-size:14px;color:#444;line-height:1.4}
+.pcard .nm{font-size:16px;font-weight:700;color:#222;display:block;margin-bottom:2px}
+.pcard .site{display:inline-block;margin-top:3px;font-size:13.5px}
+.orgs{display:grid;grid-template-columns:repeat(3,1fr);gap:26px 24px;max-width:720px}
+@media (max-width:600px){.orgs{grid-template-columns:1fr 1fr;gap:20px 14px}}
+.namelist{columns:2;column-gap:40px;padding-left:22px;font-size:15.5px;max-width:none}
+.namelist li{break-inside:avoid;max-width:none}
 @media (max-width:600px){.namelist{columns:1}}
-footer{background:var(--tint);border-top:1px solid var(--rule);padding:22px 0 44px;font-size:13.5px;color:var(--muted)}
-footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer{border-top:1px solid #ccc;padding:16px 0 40px;font-size:14px;color:#555}
 footer p{margin:0 0 4px;max-width:none}
 """
 
@@ -240,23 +224,18 @@ def page(file, title, body):
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="topband"></div>
 <div class="masthead"><div class="wrap">
-<div class="row">
-<h1 class="title"><a href="index.html"><small>NASSCC 2027</small>North American Solid State Chemistry Conference</a></h1>
-<div class="when"><b>July 25 to 28, 2027</b>Duquesne University<br>Pittsburgh, Pennsylvania</div>
-</div>
-</div></div>
-<div class="navband"><div class="wrap"><nav>
+<h1><a href="index.html">North American Solid State Chemistry Conference 2027</a></h1>
+<p class="sub">Duquesne University, Pittsburgh, Pennsylvania. Sunday, July 25 to Wednesday, July 28, 2027.</p>
+<nav>
 {nav}
-</nav></div></div>
+</nav>
+</div></div>
 <main><div class="wrap">
 {body}
 </div></main>
 <footer><div class="wrap">
-<div><p>NASSCC 2027 is hosted by Duquesne University and organized by faculty of Duquesne University, the University of Pittsburgh, and Carnegie Mellon University.</p>
-<p>Registration and housing are handled by Duquesne University Conference and Event Services. Questions: <a href="contact.html">Contact</a>.</p></div>
-<div><p>&copy; {year} NASSCC organizing committee</p></div>
+<p>NASSCC 2027 is hosted by Duquesne University and organized by faculty of Duquesne University, the University of Pittsburgh, and Carnegie Mellon University. Registration and housing are handled by Duquesne University Conference and Event Services. Questions: <a href="contact.html">Contact</a>.</p>
 </div></footer>
 </body>
 </html>
@@ -279,14 +258,15 @@ PAGES["index.html"] = ("Home", f"""
 <p>The 2027 meeting is hosted by Duquesne University and organized jointly by faculty of Duquesne, the University of Pittsburgh, and Carnegie Mellon University. It is the first NASSCC in Pittsburgh. <a href="about.html">More about the conference</a>.</p>
 </div>
 <div>
-<dl class="facts">
-<div><dt>Dates</dt><dd>Sunday July 25 to Wednesday July 28, 2027</dd></div>
-<div><dt>Venue</dt><dd>Duquesne University, 600 Forbes Avenue, Pittsburgh, Pennsylvania</dd></div>
-<div><dt>Format</dt><dd>Sunday workshops, industry panel, reception, and opening talks; three days of single-session talks; poster sessions Monday and Tuesday evenings; closing dinner Wednesday</dd></div>
-<div><dt>Organizers</dt><dd>Jennifer A. Aitken (Duquesne, chair), Xin Gui (Pittsburgh), Juan R. Chamorro (Carnegie Mellon)</dd></div>
-<div><dt>Abstracts</dt><dd>{TBA}</dd></div>
-<div><dt>Registration</dt><dd>{TBA}</dd></div>
-</dl>
+<table class="facts">
+<tr><td>Dates</td><td>Sunday, July 25 to Wednesday, July 28, 2027</td></tr>
+<tr><td>Venue</td><td>Duquesne University, 600 Forbes Avenue, Pittsburgh, Pennsylvania</td></tr>
+<tr><td>Format</td><td>Sunday workshops, industry panel, reception, and opening talks; Monday to Wednesday single-session talks; poster sessions Monday and Tuesday evenings; closing dinner Wednesday</td></tr>
+<tr><td>Organizers</td><td>Jennifer A. Aitken (Duquesne University, chair), Xin Gui (University of Pittsburgh), Juan R. Chamorro (Carnegie Mellon University)</td></tr>
+<tr><td>Abstracts</td><td>{TBA}</td></tr>
+<tr><td>Registration</td><td>{TBA}</td></tr>
+<tr><td>Housing</td><td>On-campus housing at Duquesne; details {TBA}</td></tr>
+</table>
 </div>
 </div>
 
@@ -301,22 +281,12 @@ PAGES["index.html"] = ("Home", f"""
 <h2>Invited speakers</h2>
 <p>Confirmed to date. Invitations are still out, and the <a href="speakers.html">speakers page</a> is updated as replies arrive.</p>
 <ul class="namelist">
-{"".join(f"<li>{n} <span>{i}</span></li>" for n, t, d, i, k, w, s in SPEAKERS)}
+{"".join(f"<li>{n}, {i}</li>" for n, t, d, i, k, w, s in SPEAKERS)}
 </ul>
-<p class="small">Opening talk: {", ".join(f"{n} ({i})" for n, t, d, i, k, w, s in OPENING)}.</p>
+<p>Opening talk: {", ".join(f"{n} ({i})" for n, t, d, i, k, w, s in OPENING)}.</p>
 </div>
 
-<div class="sect">
-<h2>Key dates</h2>
-<table>
-<tr><td>Abstract submission opens</td><td>{TBA}</td></tr>
-<tr><td>Abstract deadline</td><td>{TBA}</td></tr>
-<tr><td>Registration opens</td><td>{TBA}</td></tr>
-<tr><td>Early registration deadline</td><td>{TBA}</td></tr>
-<tr><td>Workshops, reception, and opening talks</td><td>Sunday, July 25, 2027</td></tr>
-<tr><td>Scientific program</td><td>Monday July 26 to Wednesday July 28, 2027</td></tr>
-</table>
-</div>
+
 """)
 
 # ---------------------------------------------------------------- About
