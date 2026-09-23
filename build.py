@@ -331,35 +331,36 @@ THEME_LINES = [
     ["Novel Properties of", "Noncentrosymmetric", "Materials"],
     ["Advances in Crystal", "Growth and Reaction", "Mechanisms"],
     ["Next-Generation Energy", "Conversion and", "Storage Materials"],
-    ["Machine Learning,", "Autonomous Synthesis,", "and Data-Driven Approaches", "for Materials Discovery", "and Optimization"],
+    ["Machine Learning,", "Autonomous Synthesis,", "and Data-Driven", "Approaches for Materials", "Discovery and", "Optimization"],
 ]
 
 def themes_figure():
     W, n, gap = 1000, 5, 18
     bw = (W - gap * (n - 1)) / n
-    top, bh = 78, 132
-    out = [f'<svg class="themes-fig" viewBox="0 0 {W} {top + bh + 6}" role="img" aria-label="The five session themes of NASSCC 2027">']
-    out.append('<style>.tf-t{font:15px "Helvetica Neue",Helvetica,Arial,sans-serif;fill:#222}.tf-h{font:italic 16px Georgia,serif;fill:#1b2a4e}.tf-n{font:bold 13px "Helvetica Neue",Helvetica,Arial,sans-serif;fill:#8a6512}</style>')
-    out.append(f'<text class="tf-h" x="{W/2}" y="20" text-anchor="middle">One session, every talk heard by everyone, Monday to Wednesday</text>')
-    out.append(f'<line x1="{bw/2}" y1="40" x2="{W-bw/2}" y2="40" stroke="#1b2a4e" stroke-width="1.5"/>')
+    bh = 150
+    out = [f'<svg class="themes-fig" viewBox="0 0 {W} {bh + 4}" role="img" aria-label="The five session themes of NASSCC 2027">']
+    out.append('<style>.tf-t{font:14.5px "Helvetica Neue",Helvetica,Arial,sans-serif;fill:#222}.tf-n{font:bold 13px "Helvetica Neue",Helvetica,Arial,sans-serif;fill:#8a6512}</style>')
     for i, lines in enumerate(THEME_LINES):
-        x = i * (bw + gap)
+        x = i * (bw + gap) + 1
         cx = x + bw / 2
-        out.append(f'<line x1="{cx}" y1="40" x2="{cx}" y2="{top}" stroke="#d4a017" stroke-width="2"/>')
-        out.append(f'<rect x="{x}" y="{top}" width="{bw}" height="{bh}" fill="#fff" stroke="#1b2a4e" stroke-width="1.5"/>')
-        out.append(f'<text class="tf-n" x="{x+10}" y="{top+20}">{i+1}</text>')
-        y0 = top + bh / 2 - (len(lines) - 1) * 10 + 5
+        out.append(f'<rect x="{x}" y="2" width="{bw-2}" height="{bh}" fill="#fff" stroke="#1b2a4e" stroke-width="1.5"/>')
+        out.append(f'<text class="tf-n" x="{x+10}" y="20">{i+1}</text>')
+        y0 = 2 + bh / 2 - (len(lines) - 1) * 9.5 + 5
         for j, ln in enumerate(lines):
-            out.append(f'<text class="tf-t" x="{cx}" y="{y0 + j*20}" text-anchor="middle">{ln}</text>')
+            out.append(f'<text class="tf-t" x="{cx}" y="{y0 + j*19}" text-anchor="middle">{ln}</text>')
     out.append('</svg>')
     return "".join(out)
 
-# Jen Aitken is writing the conference description. The two paragraphs below are placeholders
-# in the same register; replace them with hers when they arrive.
 PAGES["about.html"] = ("About", f"""
 <h2>About NASSCC</h2>
 <p class="lead">The North American Solid State Chemistry Conference is a biennial meeting for the solid state chemistry community of the United States, Canada, and Mexico. It alternates with the Gordon Research Conference on Solid State Chemistry, so the community meets every summer.</p>
 <p>The conference covers solid state chemistry broadly: synthesis, crystal growth, structure determination, bonding, and the physical properties of inorganic and hybrid extended solids. It keeps the informal, single-session style of a Gordon conference while giving students, postdoctoral researchers, and early-career faculty a place on the program. Attendance has grown to about two hundred, and students make up more than half of it.</p>
+
+<div class="sect">
+<h2>Session themes</h2>
+<p>Talks are grouped under five themes. Abstracts are submitted to one of them.</p>
+<figure class="themes-wrap">{themes_figure()}</figure>
+</div>
 
 <div class="sect">
 <h2>The 2027 meeting</h2>
@@ -370,12 +371,6 @@ PAGES["about.html"] = ("About", f"""
 <li>Poster sessions on Monday and Tuesday evenings, and a closing dinner with poster awards on Wednesday.</li>
 </ul>
 <p>Invited speakers are chosen to balance established and early-career researchers, with at least three per theme. Contributed talks go to the strongest postdoc and senior graduate student abstracts. See the <a href="program.html">program</a> and the <a href="speakers.html">speakers</a>.</p>
-</div>
-
-<div class="sect">
-<h2>Session themes</h2>
-<p>Talks are grouped under five themes. Abstracts are submitted to one of them.</p>
-<figure class="themes-wrap">{themes_figure()}</figure>
 </div>
 
 <div class="sect">
