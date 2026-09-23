@@ -137,12 +137,11 @@ h3{color:#1b2a4e}
 .masthead .sub{margin:0 0 12px}
 .masthead h1 a{color:#1b2a4e;text-decoration:none}
 .masthead .sub{margin:0 0 12px;font-size:17px;color:#444}
-nav{font-size:16px;padding:8px 0 0;display:flex;flex-wrap:wrap}
-nav a{color:#1a4a8a;text-decoration:none;margin-right:6px;padding-bottom:9px;border-bottom:3px solid transparent}
-nav a::after{content:"|";color:#999;margin-left:9px}
-nav a:last-child::after{content:""}
-nav a.active{font-weight:700;color:#222;border-bottom-color:#d4a017}
-nav a:hover{text-decoration:underline}
+nav{font-size:16.5px;padding:10px 0 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:0 14px}
+nav a{color:#1a4a8a;text-decoration:none;padding-bottom:9px;border-bottom:3px solid transparent;white-space:nowrap}
+nav a.active{font-weight:700;color:#1b2a4e;border-bottom-color:#d4a017}
+nav a:hover{color:#1b2a4e}
+@media (max-width:720px){nav{justify-content:flex-start;gap:0 18px}nav a{padding-bottom:6px}}
 main{padding:26px 0 50px;min-height:50vh}
 h2{font-size:27px;margin:28px 0 10px}
 h2:first-child{margin-top:0}
