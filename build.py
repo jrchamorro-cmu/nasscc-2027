@@ -263,6 +263,7 @@ def page(file, title, body):
 <footer><div class="wrap">
 <p>NASSCC 2027 is hosted by Duquesne University and organized by faculty of Duquesne University, the University of Pittsburgh, and Carnegie Mellon University. Registration and housing are handled by Duquesne University Conference and Event Services. Questions: <a href="contact.html">Contact</a>.</p>
 {credit}
+<p>&copy; {year} NASSCC 2027 Organizing Committee.</p>
 </div></footer>
 </body>
 </html>
