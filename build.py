@@ -301,6 +301,14 @@ PAGES["index.html"] = ("Home", f"""
 
 <div class="cols">
 <div>
+<h2>Invited speakers</h2>
+<p>Confirmed to date. Invitations are still out, and the <a href="speakers.html">speakers page</a> is updated as replies arrive.</p>
+<ul class="namelist one">
+{"".join(f"<li>{n}, {i}</li>" for n, t, d, i, k, w, s in SPEAKERS)}
+</ul>
+<p>Opening talk: {", ".join(f"{n} ({i})" for n, t, d, i, k, w, s in OPENING)}.</p>
+</div>
+<div>
 <table class="facts">
 <tr><td>Dates</td><td>July 25 to 28, 2027</td></tr>
 <tr><td>Venue</td><td>Duquesne University, Pittsburgh</td></tr>
@@ -309,14 +317,6 @@ PAGES["index.html"] = ("Home", f"""
 <tr><td>Abstracts</td><td>{TBA}</td></tr>
 <tr><td>Registration</td><td>{TBA}</td></tr>
 </table>
-</div>
-<div>
-<h2>Invited speakers</h2>
-<p>Confirmed to date. Invitations are still out, and the <a href="speakers.html">speakers page</a> is updated as replies arrive.</p>
-<ul class="namelist one">
-{"".join(f"<li>{n}, {i}</li>" for n, t, d, i, k, w, s in SPEAKERS)}
-</ul>
-<p>Opening talk: {", ".join(f"{n} ({i})" for n, t, d, i, k, w, s in OPENING)}.</p>
 </div>
 </div>
 """)
