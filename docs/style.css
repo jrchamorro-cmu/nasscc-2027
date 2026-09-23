@@ -42,6 +42,7 @@ figure img{width:100%;height:auto}
 figcaption{font-size:13px;color:#555;padding-top:6px}
 .banner img{aspect-ratio:2/1.1;object-fit:cover;object-position:50% 0}
 .cols{display:grid;grid-template-columns:1.15fr 1fr;gap:48px;align-items:start}
+.cols h2{margin-top:0}
 @media (max-width:720px){.cols{grid-template-columns:1fr;gap:12px}}
 table{border-collapse:collapse;width:100%;margin:6px 0 16px;font-size:15.5px}
 th,td{text-align:left;padding:7px 12px 7px 0;border-bottom:1px solid #ccc;vertical-align:top}
@@ -64,6 +65,7 @@ table.facts td{padding-top:9px;padding-bottom:9px;white-space:nowrap}
 .orgs{display:grid;grid-template-columns:repeat(3,1fr);gap:26px 24px;max-width:720px}
 @media (max-width:600px){.orgs{grid-template-columns:1fr 1fr;gap:20px 14px}}
 .namelist{columns:2;column-gap:40px;padding-left:22px;font-size:15.5px;max-width:none}
+.namelist.one{columns:1}
 .namelist li{break-inside:avoid;max-width:none}
 @media (max-width:600px){.namelist{columns:1}}
 footer{border-top:4px solid #1b2a4e;padding:16px 0 40px;font-size:14px;color:#555}

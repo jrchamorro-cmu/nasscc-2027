@@ -162,6 +162,7 @@ figure img{width:100%;height:auto}
 figcaption{font-size:13px;color:#555;padding-top:6px}
 .banner img{aspect-ratio:2/1.1;object-fit:cover;object-position:50% 0}
 .cols{display:grid;grid-template-columns:1.15fr 1fr;gap:48px;align-items:start}
+.cols h2{margin-top:0}
 @media (max-width:720px){.cols{grid-template-columns:1fr;gap:12px}}
 table{border-collapse:collapse;width:100%;margin:6px 0 16px;font-size:15.5px}
 th,td{text-align:left;padding:7px 12px 7px 0;border-bottom:1px solid #ccc;vertical-align:top}
@@ -184,6 +185,7 @@ table.facts td{padding-top:9px;padding-bottom:9px;white-space:nowrap}
 .orgs{display:grid;grid-template-columns:repeat(3,1fr);gap:26px 24px;max-width:720px}
 @media (max-width:600px){.orgs{grid-template-columns:1fr 1fr;gap:20px 14px}}
 .namelist{columns:2;column-gap:40px;padding-left:22px;font-size:15.5px;max-width:none}
+.namelist.one{columns:1}
 .namelist li{break-inside:avoid;max-width:none}
 @media (max-width:600px){.namelist{columns:1}}
 footer{border-top:4px solid #1b2a4e;padding:16px 0 40px;font-size:14px;color:#555}
@@ -291,15 +293,13 @@ speaker_names = ", ".join(f"{n} ({i})" for n, t, d, i, k, w, s in SPEAKERS)
 
 # ---------------------------------------------------------------- Home
 PAGES["index.html"] = ("Home", f"""
-<figure class="banner"><img src="img/site/pittsburgh.jpg" alt="Downtown Pittsburgh from the Duquesne Incline, with the Monongahela and Allegheny rivers meeting at the Point"></figure>
-
-<div class="cols">
-<div>
-<h2>The meeting</h2>
 <p>NASSCC is the biennial meeting of the North American solid state chemistry community, held in the years between the Gordon Research Conference on Solid State Chemistry.</p>
 <p>The conference covers the synthesis, crystal growth, structure, bonding, and properties of extended inorganic and hybrid solids. It runs as a single session so that everyone hears every talk, and it gives students, postdoctoral researchers, and early-career faculty a place on the program alongside established researchers. Contributed talks are chosen from submitted abstracts with priority for postdocs and senior graduate students, and every accepted abstract receives a poster slot.</p>
 <p>The 2027 meeting is hosted by Duquesne University and organized jointly by faculty of Duquesne, the University of Pittsburgh, and Carnegie Mellon University. It is the first NASSCC in Pittsburgh.</p>
-</div>
+
+<figure class="banner"><img src="img/site/pittsburgh.jpg" alt="Downtown Pittsburgh from the Duquesne Incline, with the Monongahela and Allegheny rivers meeting at the Point"></figure>
+
+<div class="cols">
 <div>
 <table class="facts">
 <tr><td>Dates</td><td>July 25 to 28, 2027</td></tr>
@@ -310,25 +310,15 @@ PAGES["index.html"] = ("Home", f"""
 <tr><td>Registration</td><td>{TBA}</td></tr>
 </table>
 </div>
-</div>
-
-<div class="sect">
-<h2>Session themes</h2>
-<ol class="themes">
-{"".join(f"<li>{t}</li>" for t in THEMES.values())}
-</ol>
-</div>
-
-<div class="sect">
+<div>
 <h2>Invited speakers</h2>
 <p>Confirmed to date. Invitations are still out, and the <a href="speakers.html">speakers page</a> is updated as replies arrive.</p>
-<ul class="namelist">
+<ul class="namelist one">
 {"".join(f"<li>{n}, {i}</li>" for n, t, d, i, k, w, s in SPEAKERS)}
 </ul>
 <p>Opening talk: {", ".join(f"{n} ({i})" for n, t, d, i, k, w, s in OPENING)}.</p>
 </div>
-
-
+</div>
 """)
 
 # ---------------------------------------------------------------- About
@@ -348,6 +338,13 @@ PAGES["about.html"] = ("About", f"""
 <li>Poster sessions on Monday and Tuesday evenings, and a closing dinner with poster awards on Wednesday.</li>
 </ul>
 <p>Invited speakers are chosen to balance established and early-career researchers, with at least three per theme. Contributed talks go to the strongest postdoc and senior graduate student abstracts. See the <a href="program.html">program</a> and the <a href="speakers.html">speakers</a>.</p>
+</div>
+
+<div class="sect">
+<h2>Session themes</h2>
+<ol class="themes">
+{"".join(f"<li>{t}</li>" for t in THEMES.values())}
+</ol>
 </div>
 
 <div class="sect">
