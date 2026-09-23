@@ -196,6 +196,11 @@ footer p.credit{margin-top:8px;font-size:13px;color:#777}
 .slist b{color:#1b2a4e}
 .slist span{color:#555}
 .themes-wrap{margin:14px 0 6px}
+.orgrow{display:grid;grid-template-columns:repeat(3,1fr);gap:24px 30px;margin:6px 0 10px}
+.org{display:flex;gap:16px;align-items:flex-start;font-size:14.5px;line-height:1.45;color:#444}
+.org .portrait{width:110px;flex:none;aspect-ratio:4/5;object-fit:cover}
+.org b{color:#1b2a4e;font-size:16px}
+@media (max-width:900px){.orgrow{grid-template-columns:1fr}}
 .themes-fig{width:100%;height:auto;display:block}
 """
 
@@ -326,6 +331,13 @@ PAGES["index.html"] = ("Home", f"""
 """)
 
 # ---------------------------------------------------------------- About
+def org_row():
+    out = ['<div class="orgrow">']
+    for name, title, dept, inst, theme, site, slug in ORGANIZERS:
+        out.append(f'<div class="org">{portrait("organizers", slug, name)}<div><b>{name}</b><br>{title}<br>{dept}<br>{inst}</div></div>')
+    out.append('</div>')
+    return "".join(out)
+
 THEME_LINES = [
     ["New Frontiers in", "Quantum Materials"],
     ["Novel Properties of", "Noncentrosymmetric", "Materials"],
@@ -385,7 +397,7 @@ PAGES["about.html"] = ("About", f"""
 
 <div class="sect">
 <h2>Organizing committee</h2>
-{people_grid(ORGANIZERS, "organizers", cls="orgs") if SHOW_PHOTOS else '<ul class="slist">' + "".join(speaker_line(e) for e in ORGANIZERS) + '</ul>'}
+{org_row()}
 </div>
 
 <div class="sect">
