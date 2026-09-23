@@ -334,17 +334,27 @@ THEME_LINES = [
     ["Machine Learning,", "Autonomous Synthesis,", "and Data-Driven", "Approaches for Materials", "Discovery and", "Optimization"],
 ]
 
+# Soft fills in the site's navy and gold family, one per theme, with a darker edge of the same hue.
+THEME_COLORS = [
+    ("#e6ebf4", "#1b2a4e"),   # pale navy
+    ("#f7eed6", "#a67c1a"),   # pale gold
+    ("#e9e6f2", "#4b4a7a"),   # pale violet, from the crystals in the logo
+    ("#e4eff0", "#2f6b73"),   # pale teal
+    ("#f4e7e4", "#8c3a34"),   # pale brick, from the incline car
+]
+
 def themes_figure():
     W, n, gap = 1000, 5, 18
     bw = (W - gap * (n - 1)) / n
     bh = 150
     out = [f'<svg class="themes-fig" viewBox="0 0 {W} {bh + 4}" role="img" aria-label="The five session themes of NASSCC 2027">']
-    out.append('<style>.tf-t{font:14.5px "Helvetica Neue",Helvetica,Arial,sans-serif;fill:#222}.tf-n{font:bold 13px "Helvetica Neue",Helvetica,Arial,sans-serif;fill:#8a6512}</style>')
+    out.append('<style>.tf-t{font:14.5px "Helvetica Neue",Helvetica,Arial,sans-serif;fill:#222}.tf-n{font:bold 13px "Helvetica Neue",Helvetica,Arial,sans-serif}</style>')
     for i, lines in enumerate(THEME_LINES):
         x = i * (bw + gap) + 1
         cx = x + bw / 2
-        out.append(f'<rect x="{x}" y="2" width="{bw-2}" height="{bh}" fill="#fff" stroke="#1b2a4e" stroke-width="1.5"/>')
-        out.append(f'<text class="tf-n" x="{x+10}" y="20">{i+1}</text>')
+        fill, edge = THEME_COLORS[i]
+        out.append(f'<rect x="{x}" y="2" width="{bw-2}" height="{bh}" fill="{fill}" stroke="{edge}" stroke-width="1.5"/>')
+        out.append(f'<text class="tf-n" x="{x+10}" y="20" fill="{edge}">{i+1}</text>')
         y0 = 2 + bh / 2 - (len(lines) - 1) * 9.5 + 5
         for j, ln in enumerate(lines):
             out.append(f'<text class="tf-t" x="{cx}" y="{y0 + j*19}" text-anchor="middle">{ln}</text>')
