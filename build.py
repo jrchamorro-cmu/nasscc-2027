@@ -125,15 +125,23 @@ a:hover{color:#0b2f5e}
 img{max-width:100%;display:block}
 .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
 h1,h2,h3{font-family:Georgia,"Iowan Old Style",Palatino,"Times New Roman",serif;font-weight:700;line-height:1.25}
-.masthead{padding:26px 0 10px;border-bottom:3px double #999}
-.masthead h1{font-size:34px;margin:0 0 2px}
-.masthead h1 a{color:#222;text-decoration:none}
+h2{color:#1b2a4e;padding-bottom:4px;border-bottom:2px solid #d4a017;display:inline-block}
+h3{color:#1b2a4e}
+.topband{height:8px;background:#1b2a4e;border-bottom:3px solid #d4a017}
+.masthead{padding:22px 0 0;border-bottom:1px solid #c8c8c8}
+.masthead .row{display:flex;align-items:center;gap:22px}
+.masthead .row>a{flex:none}
+.masthead .mark{width:112px;height:112px;flex:none;margin-bottom:10px}
+@media (max-width:600px){.masthead .mark{width:72px;height:72px}}
+.masthead h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 2px}
+.masthead .sub{margin:0 0 12px}
+.masthead h1 a{color:#1b2a4e;text-decoration:none}
 .masthead .sub{margin:0 0 12px;font-size:17px;color:#444}
-nav{font-size:16px;padding:6px 0 0}
-nav a{color:#1a4a8a;text-decoration:none;margin-right:6px}
+nav{font-size:16px;padding:8px 0 0;display:flex;flex-wrap:wrap}
+nav a{color:#1a4a8a;text-decoration:none;margin-right:6px;padding-bottom:9px;border-bottom:3px solid transparent}
 nav a::after{content:"|";color:#999;margin-left:9px}
 nav a:last-child::after{content:""}
-nav a.active{font-weight:700;color:#222}
+nav a.active{font-weight:700;color:#222;border-bottom-color:#d4a017}
 nav a:hover{text-decoration:underline}
 main{padding:26px 0 50px;min-height:50vh}
 h2{font-size:27px;margin:28px 0 10px}
@@ -154,7 +162,7 @@ figcaption{font-size:13px;color:#555;padding-top:6px}
 @media (max-width:720px){.cols{grid-template-columns:1fr;gap:12px}}
 table{border-collapse:collapse;width:100%;margin:6px 0 16px;font-size:15.5px}
 th,td{text-align:left;padding:7px 12px 7px 0;border-bottom:1px solid #ccc;vertical-align:top}
-th{font-weight:700;border-bottom:2px solid #888}
+th{font-weight:700;border-bottom:2px solid #d4a017}
 table.facts td:first-child{font-weight:700;width:150px;white-space:nowrap}
 .tscroll{overflow-x:auto}
 /* people */
@@ -173,12 +181,14 @@ table.facts td:first-child{font-weight:700;width:150px;white-space:nowrap}
 .namelist{columns:2;column-gap:40px;padding-left:22px;font-size:15.5px;max-width:none}
 .namelist li{break-inside:avoid;max-width:none}
 @media (max-width:600px){.namelist{columns:1}}
-footer{border-top:1px solid #ccc;padding:16px 0 40px;font-size:14px;color:#555}
+footer{border-top:4px solid #1b2a4e;padding:16px 0 40px;font-size:14px;color:#555}
 footer p{margin:0 0 4px;max-width:none}
 """
 
-FAVICON = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#17181a"/><text x="16" y="22" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#e0b42b">N</text></svg>"""
 
+MARK = """<svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="4" fill="#d4a017"/><path d="M6 32 C 12 24, 16 20, 20 20 C 24 20, 28 16, 34 8" fill="none" stroke="#111" stroke-width="3.2" stroke-linecap="round"/><path d="M6 8 C 12 16, 16 20, 20 20 C 24 20, 28 24, 34 32" fill="none" stroke="#111" stroke-width="3.2" stroke-linecap="round"/><circle cx="20" cy="20" r="3.2" fill="#111"/></svg>"""
+
+FAVICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">' + MARK.split(">",1)[1]
 TBA = '<span class="tba">To be announced</span>'
 
 
@@ -219,14 +229,17 @@ def page(file, title, body):
 <meta property="og:site_name" content="NASSCC 2027">
 <meta property="og:title" content="{title} | NASSCC 2027">
 <meta property="og:description" content="North American Solid State Chemistry Conference, Duquesne University, Pittsburgh, July 25 to 28, 2027.">
-<meta property="og:image" content="https://{DOMAIN}/img/site/pittsburgh.jpg">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:image" content="https://{DOMAIN}/img/site/logo.png">
+<link rel="icon" href="img/site/favicon.png" type="image/png">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="topband"></div>
 <div class="masthead"><div class="wrap">
+<div class="row"><a href="index.html"><img class="mark" src="img/site/logo.png" alt="NASSCC 2027"></a><div>
 <h1><a href="index.html">North American Solid State Chemistry Conference 2027</a></h1>
 <p class="sub">Duquesne University, Pittsburgh, Pennsylvania. Sunday, July 25 to Wednesday, July 28, 2027.</p>
+</div></div>
 <nav>
 {nav}
 </nav>
@@ -530,7 +543,6 @@ if OUT.exists():
     shutil.rmtree(OUT)
 OUT.mkdir()
 (OUT / "style.css").write_text(CSS.strip() + "\n")
-(OUT / "favicon.svg").write_text(FAVICON)
 (OUT / "CNAME").write_text(DOMAIN + "\n")
 (OUT / ".nojekyll").write_text("")
 if IMG.exists():
