@@ -150,7 +150,7 @@ main{padding:26px 0 50px;min-height:50vh}
 h2{font-size:27px;margin:28px 0 10px}
 h2:first-child{margin-top:0}
 h3{font-size:20px;margin:22px 0 6px}
-p{margin:0 0 12px}
+p{margin:0 0 12px;text-align:justify;hyphens:auto}
 ul,ol{margin:0 0 12px;padding-left:26px}
 li{margin:0 0 4px}
 .small{font-size:14px;color:#555}
@@ -189,12 +189,14 @@ table.facts td{padding-top:9px;padding-bottom:9px;white-space:nowrap}
 .namelist li{break-inside:avoid;max-width:none}
 @media (max-width:600px){.namelist{columns:1}}
 footer{border-top:4px solid #1b2a4e;padding:16px 0 40px;font-size:14px;color:#555}
-footer p{margin:0 0 4px;max-width:none}
+footer p{margin:0 0 4px;max-width:none;text-align:left}
 footer p.credit{margin-top:8px;font-size:13px;color:#777}
 .slist{list-style:none;padding:0;margin:0 0 18px}
 .slist li{padding:7px 0;border-bottom:1px solid #e2e2e2;margin:0}
 .slist b{color:#1b2a4e}
 .slist span{color:#555}
+.tba,table p{text-align:left}
+@media (max-width:600px){p{text-align:left;hyphens:manual}}
 .themes-wrap{margin:14px 0 6px}
 .orgrow{display:grid;grid-template-columns:repeat(3,1fr);gap:24px 60px;margin:6px 0 10px}
 .org{display:flex;gap:18px;align-items:flex-start;font-size:14.5px;line-height:1.45;color:#444}
@@ -303,7 +305,7 @@ speaker_names = ", ".join(f"{n} ({i})" for n, t, d, i, k, w, s in SPEAKERS)
 # ---------------------------------------------------------------- Home
 PAGES["index.html"] = ("Home", f"""
 <p>NASSCC is the biennial meeting of the North American solid state chemistry community, held in the years between the Gordon Research Conference on Solid State Chemistry.</p>
-<p>The conference covers the synthesis, crystal growth, structure, bonding, and properties of extended inorganic and hybrid solids. It runs as a single session so that everyone hears every talk, and it gives students, postdoctoral researchers, and early-career faculty a place on the program alongside established researchers. Contributed talks are chosen from submitted abstracts with priority for postdocs and senior graduate students, and every accepted abstract receives a poster slot.</p>
+<p>The conference covers the synthesis, crystal growth, structure, bonding, and properties of extended inorganic and hybrid solids. It runs as a single session so that everyone can attend every talk, and it gives students, postdoctoral researchers, and early-career faculty a place on the program alongside established researchers. Contributed talks are chosen from submitted abstracts with priority for postdocs and senior graduate students, and every accepted abstract receives a poster slot.</p>
 <p>The 2027 meeting is hosted by Duquesne University and organized jointly by faculty of Duquesne, the University of Pittsburgh, and Carnegie Mellon University. It is the first NASSCC in Pittsburgh.</p>
 
 <figure class="banner"><img src="img/site/pittsburgh.jpg" alt="Downtown Pittsburgh from the Duquesne Incline, with the Monongahela and Allegheny rivers meeting at the Point"></figure>
@@ -376,7 +378,7 @@ def themes_figure():
 PAGES["about.html"] = ("About", f"""
 <h2>About NASSCC</h2>
 <p class="lead">The North American Solid State Chemistry Conference is a biennial meeting for the solid state chemistry community of the United States, Canada, and Mexico. It alternates with the Gordon Research Conference on Solid State Chemistry, so the community meets every summer.</p>
-<p>The conference covers solid state chemistry broadly: synthesis, crystal growth, structure determination, bonding, and the physical properties of inorganic and hybrid extended solids. It keeps the informal, single-session style of a Gordon conference while giving students, postdoctoral researchers, and early-career faculty a place on the program. Attendance has grown to about two hundred, and students make up more than half of it.</p>
+<p>The conference covers solid state chemistry broadly: synthesis, crystal growth, structure determination, bonding, and the physical properties of inorganic and hybrid extended solids. It keeps the informal, single-session style of a Gordon conference while giving students, postdoctoral researchers, and early-career faculty a place on the program. Attendance has grown to about two hundred, and students usually make up more than half of it.</p>
 
 <div class="sect">
 <h2>Session themes</h2>
