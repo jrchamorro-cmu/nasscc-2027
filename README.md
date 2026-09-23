@@ -27,8 +27,8 @@ Nothing in `docs/` is edited by hand. `build.py` deletes and regenerates it.
 - A photo: drop `img/speakers/<slug>.jpg` and rebuild. A card with no photo shows a grey box.
 - Opening (keynote) speakers: `OPENING`. Organizers: `ORGANIZERS`. History: `HISTORY`, `LINEAGE`.
 - Any "To be announced" is the `TBA` constant; replace it with the fact once settled.
-- Design: white page, Helvetica, black rules, one muted gold for links. No cards, gradients,
-  buttons, or icons. Keep it that way.
+- Design: plain conference page. Navy and gold from the logo, Georgia headings, Helvetica body,
+  standard blue links, no cards, panels, gradients, buttons, or icons. Keep it that way.
 
 Preview: `python3 -m http.server 8000 --directory docs` then http://localhost:8000.
 
