@@ -146,23 +146,24 @@ main{padding:26px 0 50px;min-height:50vh}
 h2{font-size:27px;margin:28px 0 10px}
 h2:first-child{margin-top:0}
 h3{font-size:20px;margin:22px 0 6px}
-p{margin:0 0 12px;max-width:80ch}
+p{margin:0 0 12px}
 ul,ol{margin:0 0 12px;padding-left:26px}
-li{margin:0 0 4px;max-width:80ch}
+li{margin:0 0 4px}
 .small{font-size:14px;color:#555}
 .sect{margin-top:30px}
-.lead{font-size:17px;max-width:80ch}
+.lead{}
 .tba{color:#666;font-style:italic}
 figure{margin:0 0 22px}
 figure img{width:100%;height:auto}
 figcaption{font-size:13px;color:#555;padding-top:6px}
-.banner img{aspect-ratio:3/1.15;object-fit:cover}
-.cols{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:start}
+.banner img{aspect-ratio:2/1;object-fit:cover;object-position:50% 35%}
+.cols{display:grid;grid-template-columns:1.15fr 1fr;gap:48px;align-items:start}
 @media (max-width:720px){.cols{grid-template-columns:1fr;gap:12px}}
 table{border-collapse:collapse;width:100%;margin:6px 0 16px;font-size:15.5px}
 th,td{text-align:left;padding:7px 12px 7px 0;border-bottom:1px solid #ccc;vertical-align:top}
 th{font-weight:700;border-bottom:2px solid #d4a017}
-table.facts td:first-child{font-weight:700;width:150px;white-space:nowrap}
+table.facts td:first-child{font-weight:700;width:120px;white-space:nowrap}
+table.facts td{padding-top:9px;padding-bottom:9px}
 .tscroll{overflow-x:auto}
 /* people */
 .pgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:26px 24px;margin:6px 0 10px}
@@ -182,6 +183,11 @@ table.facts td:first-child{font-weight:700;width:150px;white-space:nowrap}
 @media (max-width:600px){.namelist{columns:1}}
 footer{border-top:4px solid #1b2a4e;padding:16px 0 40px;font-size:14px;color:#555}
 footer p{margin:0 0 4px;max-width:none}
+footer p.credit{margin-top:8px;font-size:13px;color:#777}
+.slist{list-style:none;padding:0;margin:0 0 18px}
+.slist li{padding:7px 0;border-bottom:1px solid #e2e2e2;margin:0}
+.slist b{color:#1b2a4e}
+.slist span{color:#555}
 """
 
 
@@ -214,6 +220,7 @@ def people_grid(entries, folder, cls="pgrid"):
 
 
 def page(file, title, body):
+    credit = '<p class="credit">Photograph: downtown Pittsburgh from the Duquesne Incline, by Dllu, Wikimedia Commons, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>.</p>' if file == "index.html" else ""
     nav = "\n".join(f'<a href="{f}"{" class=\"active\"" if f == file else ""}>{t}</a>' for f, t in NAV)
     year = datetime.date.today().year
     return f"""<!doctype html>
@@ -248,6 +255,7 @@ def page(file, title, body):
 </div></main>
 <footer><div class="wrap">
 <p>NASSCC 2027 is hosted by Duquesne University and organized by faculty of Duquesne University, the University of Pittsburgh, and Carnegie Mellon University. Registration and housing are handled by Duquesne University Conference and Event Services. Questions: <a href="contact.html">Contact</a>.</p>
+{credit}
 </div></footer>
 </body>
 </html>
@@ -256,28 +264,45 @@ def page(file, title, body):
 
 PAGES = {}
 
+# SHOW_PHOTOS = True switches the page back to the portrait grid once headshots are on disk.
+SHOW_PHOTOS = False
+
+def speaker_line(e):
+    name, title, dept, inst, theme, site, slug = e
+    parts = [title] + ([dept] if dept else []) + [inst]
+    link = f' (<a href="{site}">website</a>)' if site else ""
+    return f"<li><b>{name}</b>, <span>{', '.join(parts)}</span>{link}</li>"
+
+def theme_lists():
+    out = []
+    for code, name in THEMES.items():
+        group = [x for x in SPEAKERS if x[4] == code]
+        if group:
+            out.append(f'<h3>{name}</h3><ul class="slist">{"".join(speaker_line(e) for e in group)}</ul>')
+    return "".join(out)
+
+
 speaker_names = ", ".join(f"{n} ({i})" for n, t, d, i, k, w, s in SPEAKERS)
 
 # ---------------------------------------------------------------- Home
 PAGES["index.html"] = ("Home", f"""
-<figure class="banner"><img src="img/site/pittsburgh.jpg" alt="Downtown Pittsburgh from the Duquesne Incline, with the Monongahela and Allegheny rivers meeting at the Point"><figcaption>Downtown Pittsburgh from the Duquesne Incline. Photograph by Dllu, Wikimedia Commons, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>.</figcaption></figure>
+<figure class="banner"><img src="img/site/pittsburgh.jpg" alt="Downtown Pittsburgh from the Duquesne Incline, with the Monongahela and Allegheny rivers meeting at the Point"></figure>
 
 <div class="cols">
 <div>
 <h2>The meeting</h2>
-<p class="lead">NASSCC is the biennial meeting of the North American solid state chemistry community, held in the years between the Gordon Research Conference on Solid State Chemistry.</p>
+<p>NASSCC is the biennial meeting of the North American solid state chemistry community, held in the years between the Gordon Research Conference on Solid State Chemistry.</p>
 <p>The conference covers the synthesis, crystal growth, structure, bonding, and properties of extended inorganic and hybrid solids. It runs as a single session so that everyone hears every talk, and it gives students, postdoctoral researchers, and early-career faculty a place on the program alongside established researchers. Contributed talks are chosen from submitted abstracts with priority for postdocs and senior graduate students, and every accepted abstract receives a poster slot.</p>
-<p>The 2027 meeting is hosted by Duquesne University and organized jointly by faculty of Duquesne, the University of Pittsburgh, and Carnegie Mellon University. It is the first NASSCC in Pittsburgh. <a href="about.html">More about the conference</a>.</p>
+<p>The 2027 meeting is hosted by Duquesne University and organized jointly by faculty of Duquesne, the University of Pittsburgh, and Carnegie Mellon University. It is the first NASSCC in Pittsburgh.</p>
 </div>
 <div>
 <table class="facts">
-<tr><td>Dates</td><td>Sunday, July 25 to Wednesday, July 28, 2027</td></tr>
-<tr><td>Venue</td><td>Duquesne University, 600 Forbes Avenue, Pittsburgh, Pennsylvania</td></tr>
-<tr><td>Format</td><td>Sunday workshops, industry panel, reception, and opening talks; Monday to Wednesday single-session talks; poster sessions Monday and Tuesday evenings; closing dinner Wednesday</td></tr>
-<tr><td>Organizers</td><td>Jennifer A. Aitken (Duquesne University, chair), Xin Gui (University of Pittsburgh), Juan R. Chamorro (Carnegie Mellon University)</td></tr>
+<tr><td>Dates</td><td>July 25 to 28, 2027</td></tr>
+<tr><td>Venue</td><td>Duquesne University, Pittsburgh</td></tr>
+<tr><td>Program</td><td>Workshops and opening talks Sunday; talks Monday to Wednesday; posters Monday and Tuesday evenings; dinner Wednesday</td></tr>
+<tr><td>Organizers</td><td>Jennifer Aitken (Duquesne), Xin Gui (Pitt), Juan Chamorro (CMU)</td></tr>
 <tr><td>Abstracts</td><td>{TBA}</td></tr>
 <tr><td>Registration</td><td>{TBA}</td></tr>
-<tr><td>Housing</td><td>On-campus housing at Duquesne; details {TBA}</td></tr>
 </table>
 </div>
 </div>
@@ -322,7 +347,7 @@ PAGES["about.html"] = ("About", f"""
 
 <div class="sect">
 <h2>Organizing committee</h2>
-{people_grid(ORGANIZERS, "organizers", cls="orgs")}
+{people_grid(ORGANIZERS, "organizers", cls="orgs") if SHOW_PHOTOS else '<ul class="slist">' + "".join(speaker_line(e) for e in ORGANIZERS) + '</ul>'}
 </div>
 
 <div class="sect">
@@ -377,20 +402,29 @@ def theme_blocks():
             out.append(f'<div class="sect"><h3 style="margin-top:0">{name}</h3>{people_grid(group, "speakers")}</div>')
     return "".join(out)
 
-PAGES["speakers.html"] = ("Speakers", f"""
+if SHOW_PHOTOS:
+    PAGES["speakers.html"] = ("Speakers", f"""
 <h2>Invited speakers</h2>
-<p class="lead">Confirmed invited speakers, listed by session theme. Invitations are still out, and this page is updated as replies arrive.</p>
-
+<p>Confirmed invited speakers, listed by session theme. Invitations are still out, and this page is updated as replies arrive.</p>
 <div class="sect">
 <h3 style="margin-top:0">Opening talks, Sunday evening</h3>
 {people_grid(OPENING, "speakers")}
 </div>
 {theme_blocks()}
-
 <div class="sect">
 <h2>Workshops and panel</h2>
 <p>{TBA}</p>
 </div>
+""")
+else:
+    PAGES["speakers.html"] = ("Speakers", f"""
+<h2>Invited speakers</h2>
+<p>Confirmed invited speakers, listed by session theme. Invitations are still out, and this page is updated as replies arrive.</p>
+<h3>Opening talks, Sunday evening</h3>
+<ul class="slist">{"".join(speaker_line(e) for e in OPENING)}</ul>
+{theme_lists()}
+<h2>Workshops and panel</h2>
+<p>{TBA}</p>
 """)
 
 # ---------------------------------------------------------------- Abstracts
@@ -449,48 +483,48 @@ PAGES["pittsburgh.html"] = ("Travel and Pittsburgh", f"""
 
 <div class="sect">
 <h2>Exploring Pittsburgh</h2>
-<p>Pittsburgh is a compact city of rivers, bridges, hillside neighborhoods, and museums, and most of what follows is within a short walk, bus ride, or rideshare of campus. Late July is warm, with long evenings.</p>
+<p>Pittsburgh is a compact city of rivers, bridges, hillside neighborhoods, and museums, and most of what follows is within a short walk, bus ride, or rideshare of campus. Late July is warm, with long evenings. The city's visitor site is <a href="https://www.visitpittsburgh.com/">visitpittsburgh.com</a>.</p>
 <div class="cols">
 <div>
 <h3>Rivers and views</h3>
 <ul>
-<li>Duquesne Incline and Monongahela Incline: cable cars up Mount Washington for the classic view of the Point and the skyline, best at sunset.</li>
-<li>Point State Park, where the Allegheny and Monongahela meet to form the Ohio.</li>
-<li>Three Rivers Heritage Trail: riverside walking and cycling along the North Shore and South Side.</li>
+<li><a href="https://www.duquesneincline.org/">Duquesne Incline</a> and Monongahela Incline: cable cars up Mount Washington for the classic view of the Point and the skyline, best at sunset.</li>
+<li><a href="https://www.pa.gov/agencies/dcnr/recreation/where-to-go/state-parks/find-a-park/point-state-park">Point State Park</a>, where the Allegheny and Monongahela meet to form the Ohio.</li>
+<li><a href="https://friendsoftheriverfront.org/">Three Rivers Heritage Trail</a>: riverside walking and cycling along the North Shore and South Side.</li>
 <li>Kayak rentals on the North Shore and bike share stations across the city.</li>
 </ul>
 <h3>Museums</h3>
 <ul>
-<li>The Andy Warhol Museum, on the North Shore.</li>
-<li>Carnegie Museums of Art and Natural History in Oakland, with the dinosaur halls and the Hall of Minerals and Gems.</li>
-<li>Mattress Factory: installation art in the Mexican War Streets.</li>
-<li>Phipps Conservatory: Victorian glasshouse and gardens at the edge of Schenley Park.</li>
-<li>Heinz History Center, The Frick Pittsburgh, National Aviary, Carnegie Science Center.</li>
+<li><a href="https://www.warhol.org/">The Andy Warhol Museum</a>, on the North Shore.</li>
+<li>Carnegie Museums of <a href="https://carnegiemnh.org/">Natural History</a> and Art in Oakland, with the dinosaur halls and the Hall of Minerals and Gems.</li>
+<li><a href="https://mattress.org/">Mattress Factory</a>: installation art in the Mexican War Streets.</li>
+<li><a href="https://www.phipps.conservatory.org/">Phipps Conservatory</a>: Victorian glasshouse and gardens at the edge of Schenley Park.</li>
+<li><a href="https://www.heinzhistorycenter.org/">Heinz History Center</a>, <a href="https://www.thefrickpittsburgh.org/">The Frick Pittsburgh</a>, <a href="https://www.aviary.org/">National Aviary</a>, <a href="https://carnegiesciencecenter.org/">Carnegie Science Center</a>.</li>
+</ul>
+<h3>Neighborhoods</h3>
+<ul>
+<li>Strip District: produce markets, Italian groceries, coffee roasters, and <a href="https://wholey.com/">Wholey's</a> fish market, walking distance from campus.</li>
+<li>Oakland: the university district, with the Cathedral of Learning and its <a href="https://www.nationalityrooms.pitt.edu/">Nationality Rooms</a>, Schenley Plaza, and the Carnegie Mellon campus.</li>
+<li>Lawrenceville: restaurants, bars, and shops along Butler Street.</li>
+<li>South Side and Mount Washington: East Carson Street below, Grandview Avenue overlooks above.</li>
+<li>Squirrel Hill, Shadyside, and Bloomfield (Pittsburgh's Little Italy): residential streets with good dinner options.</li>
 </ul>
 </div>
 <div>
-<h3>Neighborhoods</h3>
-<ul>
-<li>Strip District: produce markets, Italian groceries, and coffee roasters, walking distance from campus.</li>
-<li>Oakland: the university district, with the Cathedral of Learning and its Nationality Rooms, Schenley Plaza, and the Carnegie Mellon campus.</li>
-<li>Lawrenceville: restaurants, bars, and shops along Butler Street.</li>
-<li>South Side and Mount Washington: East Carson Street below, Grandview Avenue overlooks above.</li>
-<li>Squirrel Hill and Shadyside: residential streets with good dinner options.</li>
-</ul>
 <h3>Food and evenings</h3>
 <ul>
-<li>Pittsburgh classics: a Primanti Brothers sandwich with the fries inside, pierogies, and a fish sandwich.</li>
-<li>Downtown Cultural District: theaters and galleries a short walk from campus, with Market Square in the middle.</li>
-<li>PNC Park: the Pirates' riverside ballpark. Check the schedule for home games during the conference week.</li>
-<li>Kennywood: a century-old amusement park with wooden roller coasters, a short drive east.</li>
+<li><a href="https://primantibros.com/">Primanti Brothers</a>: the Pittsburgh sandwich, with the fries and slaw inside. The original is in the Strip District.</li>
+<li>Pierogies: <a href="https://pierogiesplus.com/">Pierogies Plus</a> in McKees Rocks, made in an old gas station; <a href="https://www.sdpolishdeli.com/">S&amp;D Polish Deli</a> in the Strip; and <a href="https://aptekapgh.com/">Apteka</a> in Bloomfield for a modern Eastern European take.</li>
+<li><a href="https://www.hofbrauhauspittsburgh.com/">Hofbräuhaus Pittsburgh</a> on the South Side, a beer hall with a riverside biergarten, and <a href="https://www.pennbrew.com/">Penn Brewery</a> on the North Side, the city's oldest brewery, in the old Eberhardt and Ober brewery in Deutschtown.</li>
+<li><a href="https://churchbrew.com/">Church Brew Works</a> in Lawrenceville: a brewery and restaurant in a former Catholic church, brew tanks on the altar.</li>
+<li><a href="https://www.grandconcourserestaurant.com/">Grand Concourse</a> at Station Square: seafood in the restored Pittsburgh and Lake Erie Railroad station, across the river from campus.</li>
+<li><a href="https://pamelasdiner.com/">Pamela's Diner</a> for crepe-style hotcakes at breakfast, and <a href="https://klavons.com/">Klavon's</a>, a 1920s ice cream parlor in the Strip.</li>
+<li>Downtown Cultural District: theaters and galleries a short walk from campus (<a href="https://www.trustarts.org/">Pittsburgh Cultural Trust</a>), with <a href="https://www.marketsquarepgh.com/">Market Square</a> in the middle.</li>
+<li><a href="https://www.mlb.com/pirates/ballpark">PNC Park</a>: the Pirates' riverside ballpark. Check the schedule for home games during the conference week.</li>
+<li><a href="https://www.kennywood.com/">Kennywood</a>: a century-old amusement park with wooden roller coasters, a short drive east.</li>
 </ul>
 </div>
 </div>
-</div>
-
-<div class="sect">
-<h2>Organizers' picks</h2>
-<p>{TBA}</p>
 </div>
 """)
 
@@ -528,13 +562,14 @@ PAGES["sponsors.html"] = ("Sponsors", f"""
 # ---------------------------------------------------------------- Contact
 PAGES["contact.html"] = ("Contact", f"""
 <h2>Contact</h2>
-<p class="lead">Questions about the scientific program, abstracts, or sponsorship go to the organizing committee. Questions about registration and housing go to Duquesne University Conference and Event Services once registration opens.</p>
+<p>Questions about the scientific program, abstracts, or sponsorship go to the organizing committee. Questions about registration and housing go to Duquesne University Conference and Event Services once registration opens.</p>
 <table>
 <tr><th>Name</th><th>Affiliation</th><th>Email</th></tr>
-<tr><td>Jennifer A. Aitken, chair</td><td>Duquesne University</td><td>{TBA}</td></tr>
-<tr><td>Xin Gui</td><td>University of Pittsburgh</td><td>{TBA}</td></tr>
-<tr><td>Juan R. Chamorro</td><td>Carnegie Mellon University</td><td>{TBA}</td></tr>
+<tr><td>Jennifer A. Aitken, conference chair</td><td>Duquesne University</td><td><a href="mailto:aitkenj@duq.edu">aitkenj@duq.edu</a></td></tr>
+<tr><td>Xin Gui</td><td>University of Pittsburgh</td><td><a href="mailto:xig75@pitt.edu">xig75@pitt.edu</a></td></tr>
+<tr><td>Juan R. Chamorro</td><td>Carnegie Mellon University</td><td><a href="mailto:jchamorr@andrew.cmu.edu">jchamorr@andrew.cmu.edu</a></td></tr>
 </table>
+<p>Questions or corrections about this website go to Juan Chamorro at <a href="mailto:jchamorr@andrew.cmu.edu">jchamorr@andrew.cmu.edu</a>.</p>
 """)
 
 # ---------------------------------------------------------------- build
