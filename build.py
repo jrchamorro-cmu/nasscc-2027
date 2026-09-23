@@ -195,6 +195,8 @@ footer p.credit{margin-top:8px;font-size:13px;color:#777}
 .slist li{padding:7px 0;border-bottom:1px solid #e2e2e2;margin:0}
 .slist b{color:#1b2a4e}
 .slist span{color:#555}
+.themes-wrap{margin:14px 0 6px}
+.themes-fig{width:100%;height:auto;display:block}
 """
 
 
@@ -261,7 +263,8 @@ def page(file, title, body):
 {body}
 </div></main>
 <footer><div class="wrap">
-<p>NASSCC 2027 is hosted by Duquesne University and organized by faculty of Duquesne University, the University of Pittsburgh, and Carnegie Mellon University. Registration and housing are handled by Duquesne University Conference and Event Services. Questions: <a href="contact.html">Contact</a>.</p>
+<p>NASSCC 2027 is hosted by Duquesne University and organized by faculty of Duquesne University, the University of Pittsburgh, and Carnegie Mellon University.</p>
+<p>Registration and housing are handled by Duquesne University Conference and Event Services. Questions: <a href="contact.html">Contact</a>.</p>
 {credit}
 <p>&copy; {year} NASSCC 2027 Organizing Committee.</p>
 </div></footer>
@@ -323,6 +326,34 @@ PAGES["index.html"] = ("Home", f"""
 """)
 
 # ---------------------------------------------------------------- About
+THEME_LINES = [
+    ["New Frontiers in", "Quantum Materials"],
+    ["Novel Properties of", "Noncentrosymmetric", "Materials"],
+    ["Advances in Crystal", "Growth and Reaction", "Mechanisms"],
+    ["Next-Generation Energy", "Conversion and", "Storage Materials"],
+    ["Machine Learning,", "Autonomous Synthesis,", "and Data-Driven Approaches", "for Materials Discovery", "and Optimization"],
+]
+
+def themes_figure():
+    W, n, gap = 1000, 5, 18
+    bw = (W - gap * (n - 1)) / n
+    top, bh = 78, 132
+    out = [f'<svg class="themes-fig" viewBox="0 0 {W} {top + bh + 6}" role="img" aria-label="The five session themes of NASSCC 2027">']
+    out.append('<style>.tf-t{font:15px "Helvetica Neue",Helvetica,Arial,sans-serif;fill:#222}.tf-h{font:italic 16px Georgia,serif;fill:#1b2a4e}.tf-n{font:bold 13px "Helvetica Neue",Helvetica,Arial,sans-serif;fill:#8a6512}</style>')
+    out.append(f'<text class="tf-h" x="{W/2}" y="20" text-anchor="middle">One session, every talk heard by everyone, Monday to Wednesday</text>')
+    out.append(f'<line x1="{bw/2}" y1="40" x2="{W-bw/2}" y2="40" stroke="#1b2a4e" stroke-width="1.5"/>')
+    for i, lines in enumerate(THEME_LINES):
+        x = i * (bw + gap)
+        cx = x + bw / 2
+        out.append(f'<line x1="{cx}" y1="40" x2="{cx}" y2="{top}" stroke="#d4a017" stroke-width="2"/>')
+        out.append(f'<rect x="{x}" y="{top}" width="{bw}" height="{bh}" fill="#fff" stroke="#1b2a4e" stroke-width="1.5"/>')
+        out.append(f'<text class="tf-n" x="{x+10}" y="{top+20}">{i+1}</text>')
+        y0 = top + bh / 2 - (len(lines) - 1) * 10 + 5
+        for j, ln in enumerate(lines):
+            out.append(f'<text class="tf-t" x="{cx}" y="{y0 + j*20}" text-anchor="middle">{ln}</text>')
+    out.append('</svg>')
+    return "".join(out)
+
 # Jen Aitken is writing the conference description. The two paragraphs below are placeholders
 # in the same register; replace them with hers when they arrive.
 PAGES["about.html"] = ("About", f"""
@@ -343,9 +374,8 @@ PAGES["about.html"] = ("About", f"""
 
 <div class="sect">
 <h2>Session themes</h2>
-<ol class="themes">
-{"".join(f"<li>{t}</li>" for t in THEMES.values())}
-</ol>
+<p>Talks are grouped under five themes. Abstracts are submitted to one of them.</p>
+<figure class="themes-wrap">{themes_figure()}</figure>
 </div>
 
 <div class="sect">
@@ -381,13 +411,6 @@ PAGES["program.html"] = ("Program", f"""
 <tr><td>Tuesday, July 27</td><td>Talks</td><td>Poster session II</td></tr>
 <tr><td>Wednesday, July 28</td><td>Talks</td><td>Conference dinner and poster awards</td></tr>
 </table>
-</div>
-
-<div class="sect">
-<h2>Session themes</h2>
-<ol class="themes">
-{"".join(f"<li>{t}</li>" for t in THEMES.values())}
-</ol>
 </div>
 
 <div class="sect">
@@ -533,7 +556,7 @@ PAGES["pittsburgh.html"] = ("Travel and Pittsburgh", f"""
 
 # ---------------------------------------------------------------- History
 def history_table(rows):
-    body = "".join(f"<tr><td>{y}</td><td>{h}</td><td>{c}</td><td>{d}</td><td>{o if o else TBA}</td></tr>" for y, h, c, d, o in rows)
+    body = "".join(f"<tr><td>{y}</td><td>{h}</td><td>{c}</td><td>{d}</td><td>{o}</td></tr>" for y, h, c, d, o in rows)
     return f'<div class="tscroll"><table><tr><th>Year</th><th>Host</th><th>City</th><th>Dates</th><th>Organizers</th></tr>{body}</table></div>'
 
 PAGES["history.html"] = ("History", f"""
@@ -572,7 +595,7 @@ PAGES["contact.html"] = ("Contact", f"""
 <tr><td>Xin Gui</td><td>University of Pittsburgh</td><td><a href="mailto:xig75@pitt.edu">xig75@pitt.edu</a></td></tr>
 <tr><td>Juan R. Chamorro</td><td>Carnegie Mellon University</td><td><a href="mailto:jchamorr@andrew.cmu.edu">jchamorr@andrew.cmu.edu</a></td></tr>
 </table>
-<p>Questions or corrections about this website go to Juan Chamorro at <a href="mailto:jchamorr@andrew.cmu.edu">jchamorr@andrew.cmu.edu</a>.</p>
+<p>Please send questions or corrections about this website to Juan Chamorro at <a href="mailto:jchamorr@andrew.cmu.edu">jchamorr@andrew.cmu.edu</a>.</p>
 """)
 
 # ---------------------------------------------------------------- build
