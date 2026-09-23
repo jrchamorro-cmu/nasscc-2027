@@ -167,7 +167,8 @@ table{border-collapse:collapse;width:100%;margin:6px 0 16px;font-size:15.5px}
 th,td{text-align:left;padding:7px 12px 7px 0;border-bottom:1px solid #ccc;vertical-align:top}
 th{font-weight:700;border-bottom:2px solid #d4a017}
 table.facts td:first-child{font-weight:700;width:120px;white-space:nowrap}
-table.facts td{padding-top:9px;padding-bottom:9px}
+table.facts td{padding-top:9px;padding-bottom:9px;white-space:nowrap}
+@media (max-width:720px){table.facts td{white-space:normal}}
 .tscroll{overflow-x:auto}
 /* people */
 .pgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:26px 24px;margin:6px 0 10px}
@@ -303,8 +304,8 @@ PAGES["index.html"] = ("Home", f"""
 <table class="facts">
 <tr><td>Dates</td><td>July 25 to 28, 2027</td></tr>
 <tr><td>Venue</td><td>Duquesne University, Pittsburgh</td></tr>
-<tr><td>Program</td><td>Workshops and opening talks Sunday; talks Monday to Wednesday; posters Monday and Tuesday evenings; dinner Wednesday</td></tr>
-<tr><td>Organizers</td><td>Jennifer Aitken (Duquesne), Xin Gui (Pitt), Juan Chamorro (CMU)</td></tr>
+<tr><td>Program</td><td>Workshops and opening talks, Sunday<br>Talks, Monday to Wednesday<br>Posters, Monday and Tuesday evenings<br>Conference dinner, Wednesday</td></tr>
+<tr><td>Organizers</td><td>Jennifer Aitken, Duquesne University<br>Xin Gui, University of Pittsburgh<br>Juan Chamorro, Carnegie Mellon University</td></tr>
 <tr><td>Abstracts</td><td>{TBA}</td></tr>
 <tr><td>Registration</td><td>{TBA}</td></tr>
 </table>
