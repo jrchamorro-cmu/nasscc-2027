@@ -97,6 +97,8 @@ ORGANIZERS = [
 
 # Every meeting in the series with a documented host. Organizers are listed only where a
 # conference page, program, or award names them. Sources: Service/NASSCC-2027/Past-Conferences/.
+# The 1995 to 1999 hosts and the pre-1991 narrative come from G. J. Miller, Solid State
+# Sciences 182 (2026) 108496, which names no organizers or dates for those years.
 HISTORY = [
     ("2027", "Duquesne University", "Pittsburgh, Pennsylvania", "July 25 to 28", "Jennifer Aitken, Xin Gui, Juan Chamorro"),
     ("2025", "Iowa State University", "Ames, Iowa", "July 28 to 31", "Julia Zaikina, Kirill Kovnir"),
@@ -114,6 +116,9 @@ HISTORY = [
 LINEAGE = [
     ("2003", "Michigan State University", "East Lansing, Michigan", "May 29 to 31", "Mercouri Kanatzidis, S. D. Mahanti"),
     ("2001", "Colorado State University", "Fort Collins, Colorado", "June 20 to 24", "Peter Dorhout"),
+    ("1999", "Iowa State University", "Ames, Iowa", "", ""),
+    ("1997", "University of Michigan", "Ann Arbor, Michigan", "", ""),
+    ("1995", "Cornell University", "Ithaca, New York", "", ""),
     ("1991", "University of Kansas", "Lawrence, Kansas", "June 9 to 12", "Paul Gilles"),
 ]
 
@@ -585,15 +590,17 @@ def history_table(rows):
 
 PAGES["history.html"] = ("History", f"""
 <h2>History of the meeting</h2>
-<p class="lead">NASSCC has met every two years since 2005, moving between universities across the continent. Its roots go back further, to a Midwestern high-temperature chemistry conference that added "solid state chemistry" to its name in 1991.</p>
-<p>The meeting began as the Midwest High Temperature and Solid State Chemistry Conference, a regional gathering of high-temperature and solid state chemists. The 2005 meeting at Notre Dame dropped "High Temperature" from the name, and the 2007 meeting at Texas A&amp;M was the first to call itself North American. Since then the conference has alternated with the Gordon Research Conference on Solid State Chemistry, so that the community meets every summer, and has grown from roughly one hundred participants to more than two hundred.</p>
-<p>The format has stayed constant: three days of single-session talks mixing invited and contributed speakers, two evening poster sessions, and a conference dinner with poster prizes. Pre-conference workshops on diffraction, machine learning, and outreach have been part of the meeting since 2015. The 2027 meeting in Pittsburgh is the twelfth under the North American name and the first in Pennsylvania.</p>
+<p class="lead">NASSCC has met every two years since 2005, moving between universities across the continent. Its roots go back to the early 1960s, to a biennial meeting of high-temperature chemistry groups in the Midwest.</p>
+<p>Paul Gilles at the University of Kansas and Fritz Franzen at Iowa State started the Midwest High-Temperature Conference in the early 1960s, as the students of Gilles's group became faculty at other Midwestern universities. It alternated with the Gordon Research Conference on High-Temperature Chemistry and ran like a large group meeting: students gave short talks and the discussion went deep. Kansas and Iowa State hosted into the 1970s, and the meeting later moved to the University of Toledo, Rice, and Wichita State.</p>
+<p>As high-temperature vaporization work waned and solid state chemistry grew, the scope widened and the name became the Midwest High Temperature and Solid State Chemistry Conference; the 1991 meeting at Kansas was the first to carry solid state chemistry in its title. The meeting stayed biennial and informal, now alternating with the Gordon Research Conference on Solid State Chemistry, which began in 1978, so that the community meets every summer. In the 1990s it reached as far east as Cornell and as far west as Colorado State, and invited talks joined the student talks and posters. The 2005 meeting at Notre Dame dropped "High Temperature" from the name, the 2007 meeting at Texas A&amp;M was the first to call itself North American, and McMaster in 2011 was the first host outside the United States. Attendance has grown from roughly one hundred to more than two hundred.</p>
+<p>The format has stayed close to its origins: three days of single-session talks mixing invited and contributed speakers, two evening poster sessions, and a conference dinner with poster prizes. Pre-conference workshops on diffraction, machine learning, and outreach have been part of the meeting since 2015. The 2027 meeting in Pittsburgh is the eleventh under the North American name and the first in Pennsylvania.</p>
+<p class="small">Further reading: Gordon J. Miller, <a href="https://doi.org/10.1016/j.solidstatesciences.2026.108496">Some personal reflections on NASSCC and the growth of solid state chemistry at Iowa State University</a>, <i>Solid State Sciences</i> 182, 108496 (2026).</p>
 
 <div class="sect">
 <h3 style="margin-top:0">North American Solid State Chemistry Conference</h3>
 {history_table(HISTORY)}
 <h3>Before 2005: the Midwest High Temperature and Solid State Chemistry Conference</h3>
-<p>The documented predecessors. Meetings in the 1990s between these are being compiled.</p>
+<p>The documented predecessors. Dates and organizers for several of these, and the meetings of the 1960s to 1980s, are still being compiled.</p>
 {history_table(LINEAGE)}
 <p class="small">Several early meetings left no web record, and organizers for some years are missing above. If you organized, spoke at, or attended one of them and can fill a gap, the organizers would be glad to hear from you through the <a href="contact.html">Contact</a> page.</p>
 </div>
